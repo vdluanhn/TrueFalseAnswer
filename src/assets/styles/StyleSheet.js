@@ -16,6 +16,14 @@ export default StyleSheet.create({
     backgroundColor: 'blue',
     textAlign: 'center',
   },
+  numOfTrue: {
+    marginTop: 20,
+    fontSize: 15,
+    color: 'blue',
+    fontWeight: 'bold',
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+  },
 
   button: {
     fontSize: 12,
