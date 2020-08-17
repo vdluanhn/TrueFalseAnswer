@@ -11,6 +11,7 @@ import {SafeAreaView, StyleSheet, StatusBar} from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {MathQuiz} from './src/pages/MathQuiz';
+import {CircularProgressBar} from './src/components/CircularProgressBar';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       {/* <StatusBar barStyle="dark-content" /> */}
       <SafeAreaView>
         <MathQuiz />
+        {/* <CircularProgressBar /> */}
       </SafeAreaView>
     </>
   );

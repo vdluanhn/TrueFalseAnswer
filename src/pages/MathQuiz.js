@@ -6,9 +6,10 @@ import {
   Alert,
   TouchableOpacity,
   Animated,
+  Image,
 } from 'react-native';
 import styles from '../assets/styles/StyleSheet';
-
+const backgroundImage = '../assets/images/background.jpg';
 const randomNum = (fromNum, toNum) => {
   return fromNum + Math.floor(Math.random() * (toNum - fromNum));
 };
@@ -25,7 +26,7 @@ export const MathQuiz = () => {
   const [animValueTwo, setAnimValueTwo] = useState(new Animated.Value(700));
 
   const randomMathPlay = () => {
-    if (total > 100) {
+    if (total >= 100) {
       Alert.alert('End game, your result: ', numOfTrue + '/' + total);
       setNumOfTrue(0);
       setTotal(0);
@@ -67,8 +68,8 @@ export const MathQuiz = () => {
         '= ' +
         resultValue,
     );
-    const fromNum = resultValue - 3;
-    const toNum = resultValue + 3;
+    const fromNum = resultValue - 1;
+    const toNum = resultValue + 1;
     console.log('from ', fromNum);
     console.log('to ', toNum);
     const valueRusultRandomShow = randomNum(fromNum, toNum);
@@ -131,15 +132,64 @@ export const MathQuiz = () => {
   const run = Animated.timing(animValueOne, {toValue: 0, duration: 1000});
   return (
     <View style={styleSheet.container}>
-      <View>
-        <Text style={styles.title}>Math quiz</Text>
+      <Image
+        source={require(backgroundImage)}
+        style={{
+          position: 'absolute',
+          resizeMode: 'stretch',
+          height: '100%',
+          width: '100%',
+        }}
+      />
+      <View
+        style={[
+          styleSheet.actionView,
+          {
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            opacity: 0.3,
+          },
+        ]}
+      />
+      <View className="header">
+        <View>
+          <View
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'blue',
+              opacity: 0.3,
+            }}
+          />
+          <Text style={styles.title}>Math quiz</Text>
+        </View>
         <Text style={styles.numOfTrue}>
-          Number of true: {numOfTrue}/{total}
+          Number of correct: {numOfTrue}/{total}
         </Text>
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+        }}>
+        {/* <View style={{backgroundColor: 'grey', height: 100, width: 100}}></View>
+        <View style={{backgroundColor: 'grey', height: 100, width: 100}}></View> */}
       </View>
       <View style={styleSheet.containerInput}>
         <View style={[styles.squareLeft, {marginLeft: animValueOne}]}>
-          <Text style={styleSheet.valueParam}>{valueOne}</Text>
+          <View
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'red',
+              opacity: 0.4,
+            }}
+          />
+          <Text style={styles.valueParam}>{valueOne}</Text>
         </View>
         <View
           style={[
@@ -152,33 +202,108 @@ export const MathQuiz = () => {
             },
           ]}>
           <View style={styles.cycle}>
+            <View
+              style={{
+                height: 50,
+                width: 50,
+                borderRadius: 25,
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                backgroundColor: 'yellow',
+                opacity: 0.4,
+              }}
+            />
             <Text style={styleSheet.valueParam}>{valueMath}</Text>
           </View>
         </View>
         <View style={styles.squareRight}>
+          <View
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'green',
+              opacity: 0.4,
+            }}
+          />
           <Text style={styleSheet.valueParam}>{valueTwo}</Text>
         </View>
       </View>
       <View style={styleSheet.resultView}>
+        <View
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'yellow',
+            opacity: 0.4,
+          }}
+        />
         <Text style={[styleSheet.valueParam, {fontSize: 40}]}>
           {valueResult}
         </Text>
       </View>
-      <View style={styleSheet.actionView}>
-        <TouchableOpacity
-          style={styleSheet.activeTrue}
-          onPress={() => handleClick(true)}>
-          <View style={styleSheet.activeTrue}>
-            <Text style={styleSheet.valueParam}>TRUE</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styleSheet.activeTrue}
-          onPress={() => handleClick(false)}>
-          <View style={styleSheet.activeFalse}>
-            <Text style={styleSheet.valueParam}>FALSE</Text>
-          </View>
-        </TouchableOpacity>
+      <View>
+        <View
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            opacity: 0.4,
+            borderWidth: 1,
+            borderColor: 'white',
+          }}
+        />
+        <View style={styleSheet.actionView}>
+          <TouchableOpacity
+            style={styleSheet.activeTrue}
+            onPress={() => handleClick(true)}>
+            <View>
+              <View
+                style={{
+                  borderRadius: 10,
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: 'green',
+                  opacity: 0.7,
+                }}
+              />
+              <Text
+                style={[
+                  styleSheet.valueParam,
+                  {fontWeight: 'normal', fontFamily: 'Buff'},
+                ]}>
+                TRUE
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styleSheet.activeFalse}
+            onPress={() => handleClick(false)}>
+            <View>
+              <View
+                style={{
+                  borderRadius: 10,
+                  position: 'absolute',
+                  width: '100%',
+                  height: '100%',
+                  backgroundColor: 'red',
+                  opacity: 0.7,
+                }}
+              />
+              <Text
+                style={[
+                  styleSheet.valueParam,
+                  {fontWeight: 'normal', fontFamily: 'Buff'},
+                ]}>
+                FALSE
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -201,33 +326,38 @@ const styleSheet = StyleSheet.create({
     height: '100%',
     textAlignVertical: 'center',
     backgroundColor: 'transparent',
+    color: 'white',
   },
   resultView: {
     height: 100,
     width: 200,
-    backgroundColor: 'yellow',
+    backgroundColor: 'transparent',
     alignSelf: 'center',
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: 'white',
   },
   actionView: {
-    height: 150,
-    backgroundColor: 'grey',
+    height: 130,
+    backgroundColor: 'transparent',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },
   activeTrue: {
     width: 150,
-    height: 100,
+    height: '80%',
     borderRadius: 10,
-    backgroundColor: 'green',
+    backgroundColor: 'transparent',
     alignSelf: 'center',
+    borderColor: 'white',
+    borderWidth: 1,
   },
   activeFalse: {
     width: 150,
-    height: 100,
+    height: '80%',
     borderRadius: 10,
-    backgroundColor: 'red',
+    backgroundColor: 'transparent',
     alignSelf: 'center',
+    borderColor: 'white',
+    borderWidth: 1,
   },
 });

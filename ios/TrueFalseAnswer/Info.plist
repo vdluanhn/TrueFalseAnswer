@@ -53,5 +53,16 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+    <array>
+        <string>Aerosol.ttf</string>
+        <string>BILLD___.TTF</string>
+        <string>Buff.ttf</string>
+        <string>StarellaTattoo_PERSONAL_USE.ttf</string>
+        <string>StarellaTattooDeco_PERSONAL_USE.ttf</string>
+        <string>font_number.ttf</string>
+        <string>Machow.ttf</string>
+        <string>NickyScript-PersonalUse.otf</string>
+    </array>
 </dict>
 </plist>
